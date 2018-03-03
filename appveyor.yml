@@ -28,7 +28,7 @@ services:
 ## Cache composer, chocolatey and php bits
 cache:
     - '%LOCALAPPDATA%\Composer\files -> composer.lock'
-    - composer.phar
+    - C:\wordpress-develop-master -> .appveyor.yml
     - C:\ProgramData\chocolatey\bin -> .appveyor.yml
     - C:\ProgramData\chocolatey\lib -> .appveyor.yml
     - c:\tools\php -> .appveyor.yml
