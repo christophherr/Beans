@@ -41,6 +41,8 @@ init:
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
+    - appveyor DownloadFile https://github.com/WordPress/WordPress/archive/master.zip
+    - 7z x master.zip -oC:\getbeans.io -y >nul
     - appveyor DownloadFile https://github.com/WordPress/wordpress-develop/archive/master.zip
     - 7z x master.zip -oC:\ -y >nul
     - cd C:\wordpress-develop-master
