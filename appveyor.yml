@@ -41,13 +41,11 @@ init:
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
-    - appveyor DownloadFile https://github.com/WordPress/WordPress/archive/master.zip
-    - 7z rn master.zip WordPress-master getbeans.io && 7z x master.zip -oC:\ -y >nul
-    - cd C:\getbeans.io\wp-includes
     - appveyor DownloadFile https://github.com/WordPress/wordpress-develop/archive/master.zip
     - 7z x master.zip -oC:\ -y >nul
     - cd C:\wordpress-develop-master
     - appveyor DownloadFile https://gist.githubusercontent.com/christophherr/2d1ff99dc78e8e9c955cb58ba7da3060/raw/wp-tests-config.php
+    - xcopy src C:\getbeans.io /E
     - IF EXIST c:\tools\php (SET PHP=0)
     - ps: appveyor-retry cinst --params '""/InstallDir:C:\tools\php""' --ignore-checksums -y php --version ((choco search php --exact --all-versions -r | select-string -pattern $env:php_ver_target | sort { [version]($_ -split '\|' | select -last 1) } -Descending | Select-Object -first 1) -replace '[php|]','')
     - cd c:\tools\php
