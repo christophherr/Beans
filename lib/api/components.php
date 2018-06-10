@@ -18,7 +18,7 @@
  *
  * @since 1.0.0
  *
- * @param string|array $components Name of the API component(s) to include as and indexed array. The name(s) must be
+ * @param string|array $components Name of the API component(s) to include as an indexed array. The name(s) must be
  *                                 the Beans API component folder.
  *
  * @return bool Will always return true.
@@ -160,7 +160,7 @@ function beans_add_api_component_support( $feature ) {
 }
 
 /**
- * Gets the API component support argument(s).
+ * Get the API component support argument(s).
  *
  * @since 1.0.0
  *
