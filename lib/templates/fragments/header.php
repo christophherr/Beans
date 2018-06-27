@@ -118,10 +118,14 @@ function beans_site_branding() {
 			)
 		);
 
-			$logo = get_theme_mod( 'beans_logo_image', false );
+			$beans_logo  = get_theme_mod( 'beans_logo_image', false );
+			$custom_logo = get_theme_mod( 'custom_logo' );
 
 			// phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
-			if ( $logo ) {
+			if ( $beans_logo || $custom_logo ) {
+				$custom_logo = $custom_logo ? wp_get_attachment_image_src( $custom_logo, 'full' ) : null;
+				$logo        = $beans_logo ? $beans_logo : $custom_logo[0];
+
 				beans_selfclose_markup_e(
 					'beans_logo_image',
 					'img',

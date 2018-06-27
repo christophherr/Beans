@@ -31,15 +31,20 @@ beans_add_smart_action( 'customize_register', 'beans_do_register_wp_customize_op
  * @return void
  */
 function beans_do_register_wp_customize_options() {
-	$fields = array(
-		array(
-			'id'    => 'beans_logo_image',
-			'label' => __( 'Logo Image', 'tm-beans' ),
-			'type'  => 'WP_Customize_Image_Control',
-		),
-	);
 
-	beans_register_wp_customize_options( $fields, 'title_tagline', array( 'title' => __( 'Branding', 'tm-beans' ) ) );
+	$logo = get_theme_mod( 'beans_logo_image', false );
+
+	if ( ! get_theme_support( 'custom-logo' ) || ( get_theme_support( 'custom-logo' ) && ! empty( $logo ) ) ) {
+		$fields = array(
+			array(
+				'id'    => 'beans_logo_image',
+				'label' => __( 'Logo Image', 'tm-beans' ),
+				'type'  => 'WP_Customize_Image_Control',
+			),
+		);
+
+		beans_register_wp_customize_options( $fields, 'title_tagline', array( 'title' => __( 'Branding', 'tm-beans' ) ) );
+	}
 
 	// Get layout option without default for the count.
 	$options = beans_get_layouts_for_options();
