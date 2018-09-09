@@ -431,6 +431,13 @@ final class _Beans_Compiler {
 			// Replace URL with path.
 			$fragment = beans_url_to_path( $fragment );
 
+			// Fix path on Windows.
+			// @ticket 332
+			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
+				$fragment = beans_path_to_url( $fragment );
+				$fragment = beans_url_to_path( $fragment );
+			}
+
 			// Stop here if it isn't a valid file.
 			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 				return false;
