@@ -431,16 +431,16 @@ final class _Beans_Compiler {
 			// Replace URL with path.
 			$fragment = beans_url_to_path( $fragment );
 
-			// Fix path on Windows.
+			// Fix path on some Windows and Ubuntu systems.
 			// @ticket 332
 			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 
-				if (strpos($fragment, '/') === 0 && strpos($fragment, '/', 1) !== 1 ) {
-					$fragment = beans_sanitize_path('.' . $fragment);
+				if ( false !== strpos( $fragment, '/wp-' ) ) {
+					$fragment = beans_sanitize_path('.' . $fragment );
 				}
 			}
 
-			// Stop here if it isn't a valid file.
+			// Stop here if it still isn't a valid file.
 			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 				return false;
 			}
