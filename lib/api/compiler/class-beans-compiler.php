@@ -432,12 +432,17 @@ final class _Beans_Compiler {
 			$fragment = beans_url_to_path( $fragment );
 
 			// Fix path on some Windows and Ubuntu systems.
-			// @ticket 332
+			// @ticket 332.
 			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 
 				if ( false !== strpos( $fragment, '/wp-' ) ) {
-					$fragment = beans_sanitize_path('.' . $fragment );
+					$fragment = beans_sanitize_path( '.' . $fragment );
 				}
+			}
+
+			// Account for edge cases not covered before.
+			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
+				$fragment = $this->resolve_fragment_location_by_url_parse( $fragment );
 			}
 
 			// Stop here if it still isn't a valid file.
@@ -448,6 +453,20 @@ final class _Beans_Compiler {
 
 		// It is safe to access the filesystem because we made sure it was set.
 		return $GLOBALS['wp_filesystem']->get_contents( $fragment );
+	}
+
+	/**
+	 * Resolve an edge case asset location by running through Beans's URL parsing.
+	 *
+	 * @since 1.6.0
+	 * @param string $fragment Unresolved asset fragment path.
+	 *
+	 * @return string The fragment path as modified by URL parsing.
+	 */
+	public function resolve_fragment_location_by_url_parse( $fragment ) {
+		$fragment = beans_path_to_url( $fragment );
+
+		return beans_url_to_path( $fragment );
 	}
 
 	/**
