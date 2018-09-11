@@ -117,6 +117,7 @@ function beans_add_theme_support() {
 		'flex-width'  => true,
 		'header-text' => false,
 	) );
+	add_theme_support( 'custom-logo' );
 
 	// Beans specific.
 	add_theme_support( 'offcanvas-menu' );

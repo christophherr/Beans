@@ -108,40 +108,25 @@ function beans_site_branding() {
 		)
 	);
 
-		beans_open_markup_e(
-			'beans_site_title_link',
-			'a',
-			array(
-				'href'     => home_url(), // Automatically escaped.
-				'rel'      => 'home',
-				'itemprop' => 'headline',
-			)
-		);
+		// phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
+		if( has_custom_logo() ) {
+			the_custom_logo();
+		} else {
+			beans_open_markup_e(
+				'beans_site_title_link',
+				'a',
+				array(
+					'href'     => home_url(), // Automatically escaped.
+					'rel'      => 'home',
+					'itemprop' => 'headline',
+				)
+			);
 
-			$beans_logo  = get_theme_mod( 'beans_logo_image', false );
-			$custom_logo = get_theme_mod( 'custom_logo' );
-
-			// phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
-			if ( $beans_logo || $custom_logo ) {
-				$custom_logo = $custom_logo ? wp_get_attachment_image_src( $custom_logo, 'full' ) : null;
-				$logo        = $beans_logo ? $beans_logo : $custom_logo[0];
-
-				beans_selfclose_markup_e(
-					'beans_logo_image',
-					'img',
-					array(
-						'class' => 'tm-logo',
-						'src'   => $logo, // Automatically escaped.
-						'alt'   => get_bloginfo( 'name' ), // Automatically escaped.
-					)
-				);
-			} else {
 				beans_output_e( 'beans_site_title_text', get_bloginfo( 'name' ) );
-			}
 
-		// phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
-		beans_close_markup_e( 'beans_site_title_link', 'a' );
-
+			beans_close_markup_e( 'beans_site_title_link', 'a' );
+		}
+	// phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
 	beans_close_markup_e( 'beans_site_branding', 'div' );
 }
 

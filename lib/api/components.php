@@ -33,6 +33,7 @@ function beans_load_api_components( $components ) {
 			$root . 'html/functions.php',
 			$root . 'html/class-beans-attribute.php',
 			$root . 'html/accessibility.php',
+			$root . 'html/custom-logo.php',
 		),
 		'actions'      => $root . 'actions/functions.php',
 		'filters'      => $root . 'filters/functions.php',
