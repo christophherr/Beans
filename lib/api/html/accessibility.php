@@ -47,7 +47,11 @@ function beans_build_skip_links() {
 	 *     @type string Anchor text.
 	 * }
 	 */
-	$skip_links = (array) apply_filters( 'beans_skip_links_list', $skip_links );
+	$skip_links = apply_filters( 'beans_skip_links_list', $skip_links );
+
+	if ( empty( $skip_links ) ) {
+		return;
+	}
 
 	beans_output_skip_links( $skip_links );
 }
