@@ -90,13 +90,13 @@ final class _Beans_Term_Meta {
 	 * Save Term Meta.
 	 *
 	 * @since 1.0.0
+	 * @since 1.6.0 Use update_term_meta().
 	 *
 	 * @param int $term_id Term ID.
 	 *
 	 * @return null|int Null on success or Term ID on fail.
 	 */
 	public function save( $term_id ) {
-
 		if ( _beans_doing_ajax() ) {
 			return $term_id;
 		}
@@ -112,7 +112,7 @@ final class _Beans_Term_Meta {
 		}
 
 		foreach ( $fields as $field => $value ) {
-			update_option( "beans_term_{$term_id}_{$field}", stripslashes_deep( $value ) );
+			update_term_meta( $term_id, $field, $value );
 		}
 	}
 
@@ -120,19 +120,22 @@ final class _Beans_Term_Meta {
 	 * Delete Term Meta.
 	 *
 	 * @since 1.0.0
+	 * @since 1.6.0 Use delete_term_meta().
 	 *
 	 * @param int $term_id Term ID.
 	 *
 	 * @return void
 	 */
 	public function delete( $term_id ) {
-		global $wpdb;
 
-		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Pending update to term meta handling.
-			$wpdb->prepare(
-				"DELETE FROM $wpdb->options WHERE option_name LIKE %s",
-				"beans_term_{$term_id}_%"
-			)
-		);
+		$fields = beans_post( 'beans_fields' );
+
+		if ( ! $fields ) {
+			return $term_id;
+		}
+
+		foreach ( $fields as $field ) {
+			delete_term_meta( $term_id, $field );
+		}
 	}
 }
