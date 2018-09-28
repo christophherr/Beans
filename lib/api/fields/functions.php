@@ -184,3 +184,25 @@ function _beans_pre_standardize_fields( array $fields ) {
 
 	return $_fields;
 }
+
+/**
+ * Check if the field value is an array and convert it to a string.
+ *
+ * @since 1.6.0
+ *
+ * @param array $field
+ *
+ * @return mixed
+ */
+function _beans_check_and_convert_term_meta_value( $field ) {
+
+	if ( ! is_array( $field['value'] ) ) {
+		return $field['value'];
+	}
+
+	if ( empty( $field['value'] ) ) {
+		return 0;
+	}
+
+	return $field['value'][0];
+}
