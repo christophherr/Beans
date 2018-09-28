@@ -87,13 +87,19 @@ function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
  * Get the image's URL.
  *
  * @since 1.5.0
+ * @since 1.6.0 Account for array from term_meta
  *
  * @param mixed $image_id The image's attachment ID.
  *
  * @return string|void
  */
 function _beans_get_image_url( $image_id ) {
-	$image_id = (int) $image_id;
+
+	if ( ! is_array( $image_id ) ) {
+		$image_id = (int) $image_id;
+	} else {
+		$image_id = (int) $image_id[0];
+	}
 
 	// If this is not a valid image ID, bail out.
 	if ( $image_id < 1 ) {
