@@ -30,7 +30,5 @@ function beans_field_select( array $field ) {
 		return;
 	}
 
-	$field['value'] = _beans_check_and_convert_term_meta_value( $field );
-
 	include dirname( __FILE__ ) . '/views/select.php';
 }

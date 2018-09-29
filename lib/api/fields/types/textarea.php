@@ -22,11 +22,6 @@ beans_add_smart_action( 'beans_field_textarea', 'beans_field_textarea' );
  * }
  */
 function beans_field_textarea( array $field ) {
-
-	if ( is_array( $field['value'] ) ) {
-		$field['value'] = $field['value'][0];
-	}
-
 	printf( '<textarea id="%s" name="%s" %s>%s</textarea>',
 		esc_attr( $field['id'] ),
 		esc_attr( $field['name'] ),

@@ -32,7 +32,6 @@ function beans_field_radio( array $field ) {
 	}
 
 	$field['default'] = key( $field['options'] );
-	$field['value']   = _beans_check_and_convert_term_meta_value( $field );
 
 	include dirname( __FILE__ ) . '/views/radio.php';
 }

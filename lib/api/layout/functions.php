@@ -149,7 +149,6 @@ function _beans_get_layout_classes( array $args ) {
 	}
 
 	$layout        = beans_get_layout();
-	$layout        = is_array( $layout ) ? $layout[0] : $layout;
 	$has_secondary = beans_has_widget_area( 'sidebar_secondary' );
 	$c             = $has_secondary && strlen( trim( $layout ) ) > 4 ? $grid - ( $sp + $ss ) : $grid - $sp;
 

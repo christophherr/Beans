@@ -582,10 +582,6 @@ function beans_esc_attributes( $attributes ) {
 			continue;
 		}
 
-		if ( is_array( $value ) ) {
-			$value = $value[0];
-		}
-
 		$method = beans_get( $attribute, $methods );
 
 		if ( $method ) {

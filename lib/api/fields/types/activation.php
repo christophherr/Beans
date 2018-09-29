@@ -22,7 +22,6 @@ beans_add_smart_action( 'beans_field_activation', 'beans_field_activation' );
  * @type int    $default    The default value.
  */
 function beans_field_activation( array $field ) {
-	$field['value'] = _beans_check_and_convert_term_meta_value( $field );
 
 	include dirname( __FILE__ ) . '/views/activation.php';
 }

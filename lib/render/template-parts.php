@@ -172,10 +172,8 @@ beans_add_smart_action( 'beans_primary_after_markup', 'beans_sidebar_primary_tem
  * @return void
  */
 function beans_sidebar_primary_template() {
-	$layout = beans_get_layout();
-	$layout = is_array( $layout ) ? $layout[0] : $layout;
 
-	if ( false === stripos( $layout, 'sp' ) || ! beans_has_widget_area( 'sidebar_primary' ) ) {
+	if ( false === stripos( beans_get_layout(), 'sp' ) || ! beans_has_widget_area( 'sidebar_primary' ) ) {
 		return;
 	}
 
@@ -193,10 +191,8 @@ beans_add_smart_action( 'beans_primary_after_markup', 'beans_sidebar_secondary_t
  * @return void
  */
 function beans_sidebar_secondary_template() {
-	$layout = beans_get_layout();
-	$layout = is_array( $layout ) ? $layout[0] : $layout;
 
-	if ( false === stripos( $layout, 'ss' ) || ! beans_has_widget_area( 'sidebar_secondary' ) ) {
+	if ( false === stripos( beans_get_layout(), 'ss' ) || ! beans_has_widget_area( 'sidebar_secondary' ) ) {
 		return;
 	}
 

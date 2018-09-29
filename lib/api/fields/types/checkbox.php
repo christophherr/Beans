@@ -25,7 +25,6 @@ beans_add_smart_action( 'beans_field_checkbox', 'beans_field_checkbox' );
  */
 function beans_field_checkbox( array $field ) {
 	$checkbox_label = beans_get( 'checkbox_label', $field, __( 'Enable', 'tm-beans' ) );
-	$field['value'] = _beans_check_and_convert_term_meta_value( $field );
 
 	include dirname( __FILE__ ) . '/views/checkbox.php';
 }

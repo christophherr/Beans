@@ -44,8 +44,6 @@ function beans_field_slider( array $field ) {
 		'unit'     => null,
 	);
 
-	$field['value'] = _beans_check_and_convert_term_meta_value( $field );
-
 	$field = array_merge( $defaults, $field );
 
 	include dirname( __FILE__ ) . '/views/slider.php';

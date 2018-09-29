@@ -94,12 +94,7 @@ function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
  * @return string|void
  */
 function _beans_get_image_url( $image_id ) {
-
-	if ( ! is_array( $image_id ) ) {
-		$image_id = (int) $image_id;
-	} else {
-		$image_id = (int) $image_id[0];
-	}
+	$image_id = (int) $image_id;
 
 	// If this is not a valid image ID, bail out.
 	if ( $image_id < 1 ) {
