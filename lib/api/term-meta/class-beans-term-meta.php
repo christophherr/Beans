@@ -122,20 +122,27 @@ final class _Beans_Term_Meta {
 	 * @since 1.0.0
 	 * @since 1.6.0 Use delete_term_meta().
 	 *
-	 * @param int $term_id Term ID.
-	 *
+	 * @param int    $term_id Term ID.
+	 * @param string $fields Optional. Name of the field to delete.
+ 	 *
 	 * @return void
 	 */
-	public function delete( $term_id ) {
+	public function delete( $term_id, $fields = '' ) {
 
-		$fields = beans_post( 'beans_fields' );
+		if ( empty( $fields ) ) {
+			$fields = beans_post( 'beans_fields' );
 
-		if ( ! $fields ) {
-			return $term_id;
+			if ( ! $fields ) {
+				return $term_id;
+			}
 		}
 
-		foreach ( $fields as $field ) {
-			delete_term_meta( $term_id, $field );
+		if ( is_array( $fields ) ) {
+			foreach ( $fields as $field ) {
+				delete_term_meta( $term_id, $field );
+			}
+		} else {
+			delete_term_meta( $term_id, $fields );
 		}
 	}
 }

@@ -22,10 +22,22 @@
 function beans_get_term_meta( $field_id, $default = false, $term_id = false ) {
 
 	if ( ! $term_id ) {
-		$_term_id = beans_get( 'term_id', get_queried_object() );
+		$term_id = beans_get( 'term_id', get_queried_object() );
 
-		$term_id = $_term_id ? $_term_id : beans_get( 'tag_ID' );
+		if ( ! $term_id ) {
+			$term_id = beans_get( 'tag_ID' );
+		}
 	}
 
-	return $term_id ? get_term_meta( $term_id, $field_id ) : $default;
+	if ( ! $term_id ) {
+		return $default;
+	}
+
+	$term_meta = get_term_meta( $term_id );
+
+	if ( isset( $term_meta[ $field_id ] ) ) {
+		return get_term_meta( $term_id, $field_id, true );
+	}
+
+	return $default;
 }
