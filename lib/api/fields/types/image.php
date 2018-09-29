@@ -87,7 +87,6 @@ function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
  * Get the image's URL.
  *
  * @since 1.5.0
- * @since 1.6.0 Account for array from term_meta
  *
  * @param mixed $image_id The image's attachment ID.
  *

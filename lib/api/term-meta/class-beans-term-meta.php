@@ -97,6 +97,7 @@ final class _Beans_Term_Meta {
 	 * @return null|int Null on success or Term ID on fail.
 	 */
 	public function save( $term_id ) {
+
 		if ( _beans_doing_ajax() ) {
 			return $term_id;
 		}
