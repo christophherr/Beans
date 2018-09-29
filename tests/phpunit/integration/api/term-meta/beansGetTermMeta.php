@@ -23,18 +23,18 @@ require_once dirname( __FILE__ ) . '/includes/class-term-meta-test-case.php';
 class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 
 	/**
-	 * Test beans_get_term_meta() should return false when no default given and term meta does not exist.
+	 * Test beans_get_term_meta() should return an empty array when no default given and term meta does not exist.
 	 */
-	public function test_should_return_false_when_no_default_given_and_term_meta_does_not_exist() {
+	public function test_should_return_empty_array_when_no_default_given_and_term_meta_does_not_exist() {
 		$this->assertFalse( beans_get_term_meta( 'beans_layout' ) );
 
 		$_GET['tag_ID'] = 1; // a tag_ID is set.
-		$this->assertFalse( beans_get_term_meta( 'beans_layout' ) );
+		$this->assertEmpty( beans_get_term_meta( 'beans_layout' ) );
 
 		$term_id = $this->factory()->category->create();
 		$this->go_to( ( '?cat=' . $term_id ) ); // a term_id is set.
 
-		$this->assertFalse( beans_get_term_meta( 'beans_layout' ) );
+		$this->assertEmpty( beans_get_term_meta( 'beans_layout' ) );
 	}
 
 	/**
@@ -54,13 +54,13 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 	 */
 	public function test_should_return_term_meta_when_it_exists() {
 		$default_term_id = $this->factory()->category->create();
-		update_option( "beans_term_{$default_term_id}_beans_layout", 'sp-c' );
+		update_term_meta( $default_term_id, 'beans_layout', 'sp_c' );
 		$provided_term_id = $this->factory()->category->create();
-		update_option( "beans_term_{$provided_term_id}_beans_layout", 'c-sp' );
+		update_term_meta( $provided_term_id, 'beans_layout', 'c_sp' );
 		$this->go_to( ( '?cat=' . $default_term_id ) );
 
-		$this->assertSame( 'sp-c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
-		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback', $provided_term_id ) );
+		$this->assertSame( 'sp_c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'c_sp', beans_get_term_meta( 'beans_layout', 'default_fallback', $provided_term_id ) );
 	}
 
 	/**
@@ -77,8 +77,8 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 	 */
 	public function test_should_return_term_meta_when_given_tag_id_set_and_term_meta_exist() {
 		$_GET['tag_ID'] = 3;
-		update_option( 'beans_term_3_beans_layout', 'sp-c' );
+		update_term_meta( 3, 'beans_layout', 'sp_c' );
 
-		$this->assertSame( 'sp-c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'sp_c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 }

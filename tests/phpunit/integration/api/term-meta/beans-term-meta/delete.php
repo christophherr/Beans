@@ -26,17 +26,14 @@ require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 class Tests_BeansTermMeta_Delete extends Term_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Term_Meta::delete() should remove term meta option from database options table.
+	 * Test _Beans_Term_Meta::delete() should remove term meta database table.
 	 */
 	public function test_should_remove_term_meta_option_from_db_options_table() {
-		add_option( 'beans_term_123_field', 'term-meta-value', '', false );
+		update_term_meta( 123, 'beans_term_field', 'term-meta-value' );
 
 		$term_meta = new _Beans_Term_Meta( 'tm-beams' );
-		$term_meta->delete( 123 );
+		$term_meta->delete( 123, 'beans_term_field' );
 
-		// Clean the options cache to make sure we are calling the database.
-		wp_cache_delete( 'beans_term_123_field', 'options' );
-
-		$this->assertFalse( get_option( 'beans_term_123_field' ) );
+		$this->assertEmpty( get_term_meta( 123, 'beans_term_field' ) );
 	}
 }

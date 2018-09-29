@@ -97,7 +97,6 @@ class Tests_BeansGetLayout extends Test_Case {
 		$post_id     = self::factory()->post->create();
 		$category_id = self::factory()->category->create( [ 'slug' => 'test-cat' ] );
 		wp_set_object_terms( $post_id, $category_id, 'category' );
-		$meta_key = "beans_term_{$category_id}_beans_layout";
 
 		// Run our tests for when the layout is not set.
 		$this->go_to( "/?cat={$category_id}" );
@@ -106,12 +105,12 @@ class Tests_BeansGetLayout extends Test_Case {
 		$this->assertSame( 'c_sp', beans_get_layout() );
 
 		// Run our tests for when the layout is set.
-		update_option( $meta_key, 'sp_c' );
+		update_term_meta( $category_id, 'beans_layout', 'sp_c' );
 		$this->go_to( "/?cat={$category_id}" );
 		$this->assertSame( 'sp_c', beans_get_layout() );
 
 		// Run our tests for when the layout is set to fallback to the default.
-		update_option( $meta_key, 'default_fallback' );
+		update_term_meta( $category_id, 'beans_layout', 'default_fallback' );
 		$this->go_to( "/?cat={$category_id}" );
 		$this->assertSame( 'c_sp', beans_get_layout() );
 	}
@@ -123,7 +122,6 @@ class Tests_BeansGetLayout extends Test_Case {
 		$post_id = self::factory()->post->create();
 		$tag_id  = self::factory()->tag->create( [ 'slug' => 'test-tag' ] );
 		wp_set_object_terms( $post_id, $tag_id, 'post_tag' );
-		$meta_key = "beans_term_{$tag_id}_beans_layout";
 
 		// Run our tests for when the layout is not set.
 		$this->go_to( '/?tag=test-tag' );
@@ -132,12 +130,12 @@ class Tests_BeansGetLayout extends Test_Case {
 		$this->assertSame( 'c_sp', beans_get_layout() );
 
 		// Run our tests for when the layout is set.
-		update_option( $meta_key, 'sp_c' );
+		update_term_meta( $tag_id, 'beans_layout', 'sp_c' );
 		$this->go_to( '/?tag=test-tag' );
 		$this->assertSame( 'sp_c', beans_get_layout() );
 
 		// Run our tests for when the layout is set to fallback to the default.
-		update_option( $meta_key, 'default_fallback' );
+		update_term_meta( $tag_id, 'beans_layout', 'default_fallback' );
 		$this->go_to( '/?tag=test-tag' );
 		$this->assertSame( 'c_sp', beans_get_layout() );
 	}
@@ -153,7 +151,6 @@ class Tests_BeansGetLayout extends Test_Case {
 			'slug'     => 'custom-term',
 		] );
 		wp_set_object_terms( $post_id, $term_id, 'test_tax' );
-		$meta_key = "beans_term_{$term_id}_beans_layout";
 
 		// Run our tests for when the layout is not set.
 		$this->go_to( '/?test_tax=custom-term' );
@@ -162,12 +159,12 @@ class Tests_BeansGetLayout extends Test_Case {
 		$this->assertSame( 'c_sp', beans_get_layout() );
 
 		// Run our tests for when the layout is set.
-		update_option( $meta_key, 'sp_c' );
+		update_term_meta( $term_id, 'beans_layout', 'sp_c' );
 		$this->go_to( '/?test_tax=custom-term' );
 		$this->assertSame( 'sp_c', beans_get_layout() );
 
 		// Run our tests for when the layout is set to fallback to the default.
-		update_option( $meta_key, 'default_fallback' );
+		update_term_meta( $term_id, 'beans_layout', 'default_fallback' );
 		$this->go_to( '/?test_tax=custom-term' );
 		$this->assertSame( 'c_sp', beans_get_layout() );
 

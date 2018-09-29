@@ -57,7 +57,9 @@ class Tests_BeansTermMeta_Save extends Term_Meta_Test_Case {
 		$term_meta = new _Beans_Term_Meta( 'tm-beans' );
 
 		$this->assertNull( $term_meta->save( 1234 ) );
-		$this->assertSame( static::$test_data['fields'][0], get_option( 'beans_term_1234_0' ) );
+		$actual = get_term_meta(1234, 1);
+		$this->assertSame( static::$test_data['fields'][1], $actual[0] );
 	}
 
 }
+

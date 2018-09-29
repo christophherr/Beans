@@ -12,7 +12,6 @@ namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use _Beans_Term_Meta;
 use Brain\Monkey;
-use Mockery;
 
 require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 

@@ -44,7 +44,7 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 			->once()
 			->andReturn( (object) [ 'term_id' => 1 ] );
 		Monkey\Functions\expect( 'get_term_meta' )
-			->with( 1, 'beans_layout' )
+			->with( 1 )
 			->twice()
 			->andReturn( 'default_fallback' );
 
@@ -61,12 +61,30 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 			->once()
 			->andReturn( (object) [ 'term_id' => 1 ] );
 		Monkey\Functions\expect( 'get_term_meta' )
-			->with( 1, 'beans_layout' )
-			->twice()
-			->andReturn( 'c-sp' );
+			->with( 1 )
+			->once()
+			->ordered()
+			->andReturn( [ 'beans_layout' => 'c_sp' ] )
+			->andAlsoExpectIt()
+			->with( 1, 'beans_layout', true )
+			->once()
+			->ordered()
+			->andReturn( 'c_sp' );
 
-		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
-		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback', 1 ) );
+		$this->assertSame( 'c_sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1 )
+			->once()
+			->ordered()
+			->andReturn( [ 'beans_layout' => 'c_sp' ] )
+			->andAlsoExpectIt()
+			->with( 1, 'beans_layout', true )
+			->once()
+			->ordered()
+			->andReturn( 'c_sp' );
+
+		$this->assertSame( 'c_sp', beans_get_term_meta( 'beans_layout', 'default_fallback', 1 ) );
 	}
 
 	/**
@@ -78,7 +96,7 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 			->andReturn( (object) [ 'post_id' => 1 ] );
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
 		Monkey\Functions\expect( 'get_term_meta' )
-			->with( 1, 'beans_layout' )
+			->with( 1 )
 			->once()
 			->andReturn( 'default_fallback' );
 
@@ -93,12 +111,21 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
 			->andReturn( (object) [ 'post_id' => 1 ] );
-		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
-		Monkey\Functions\expect( 'get_term_meta' )
-			->with( 1, 'beans_layout' )
+		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->andReturn( 'c-sp' );
+			->with( 'tag_ID' )
+			->andReturn( 1 );
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1 )
+			->once()
+			->ordered()
+			->andReturn( [ 'beans_layout' => 'c_sp' ] )
+			->andAlsoExpectIt()
+			->with( 1, 'beans_layout', true )
+			->once()
+			->ordered()
+			->andReturn( 'c_sp' );
 
-		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'c_sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 }
