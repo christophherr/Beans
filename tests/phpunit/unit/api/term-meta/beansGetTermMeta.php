@@ -43,8 +43,8 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
 			->andReturn( (object) [ 'term_id' => 1 ] );
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'default_fallback' )
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1, 'beans_layout' )
 			->twice()
 			->andReturn( 'default_fallback' );
 
@@ -60,8 +60,8 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
 			->andReturn( (object) [ 'term_id' => 1 ] );
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'default_fallback' )
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1, 'beans_layout' )
 			->twice()
 			->andReturn( 'c-sp' );
 
@@ -77,8 +77,8 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 			->once()
 			->andReturn( (object) [ 'post_id' => 1 ] );
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'default_fallback' )
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1, 'beans_layout' )
 			->once()
 			->andReturn( 'default_fallback' );
 
@@ -94,8 +94,8 @@ class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 			->once()
 			->andReturn( (object) [ 'post_id' => 1 ] );
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'default_fallback' )
+		Monkey\Functions\expect( 'get_term_meta' )
+			->with( 1, 'beans_layout' )
 			->once()
 			->andReturn( 'c-sp' );
 

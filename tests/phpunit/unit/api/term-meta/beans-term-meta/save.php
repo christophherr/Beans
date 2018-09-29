@@ -12,6 +12,7 @@ namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use _Beans_Term_Meta;
 use Brain\Monkey;
+use Mockery;
 
 require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 
@@ -95,9 +96,9 @@ class Tests_BeansTermMeta_Save extends Term_Meta_Test_Case {
 			->once()
 			->with( 'beans_fields' )
 			->andReturn( static::$test_data );
-		Monkey\Functions\expect( 'update_option' )
+		Monkey\Functions\expect( 'update_term_meta' )
 			->once()
-			->with( 'beans_term_1234_sample-field', 'sample-value' )
+			->with( 1234, 'sample-field', [ "id" => "field_id", "context" => "term_meta", "type" => "radio", "label" => "Field Label" ] )
 			->andReturn( true );
 
 		$term_meta = new _Beans_Term_Meta( 'tm-beans' );
