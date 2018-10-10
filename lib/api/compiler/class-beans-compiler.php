@@ -164,7 +164,7 @@ final class _Beans_Compiler {
 	 */
 	private function maybe_make_dir() {
 
-		if ( ! @is_dir( $this->dir ) ) {  // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- This is a valid use case.
+		if ( ! @is_dir( $this->dir ) ) { // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged -- This is a valid// use case.
 			wp_mkdir_p( $this->dir );
 		}
 
@@ -224,7 +224,7 @@ final class _Beans_Compiler {
 	 * @return string
 	 */
 	public function hash( array $given_array ) {
-		return substr( md5( @serialize( $given_array ) ), 0, 7 ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
+		return substr( md5( @serialize( $given_array ) ), 0, 7 ); // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
 	}
 
 	/**
@@ -432,7 +432,7 @@ final class _Beans_Compiler {
 			$fragment = beans_url_to_path( $fragment );
 
 			// Stop here if it isn't a valid file.
-			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
+			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 				return false;
 			}
 		}
@@ -686,7 +686,7 @@ final class _Beans_Compiler {
 			}
 
 			if ( file_exists( $fragment ) ) {
-				$fragments_filemtime[ $index ] = @filemtime( $fragment ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+				$fragments_filemtime[ $index ] = @filemtime( $fragment ); // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 			}
 		}
 
@@ -742,7 +742,7 @@ final class _Beans_Compiler {
 		foreach ( $items as $item ) {
 
 			// Skip this one if it's a directory.
-			if ( @is_dir( $item ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			if ( @is_dir( $item ) ) { // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 				continue;
 			}
 
@@ -769,7 +769,7 @@ final class _Beans_Compiler {
 			}
 
 			// Clean up other modified files.
-			@unlink( $this->dir . '/' . $item );  // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			@unlink( $this->dir . '/' . $item );  // phpcs:ignore Wordpress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 		}
 	}
 
