@@ -74,4 +74,7 @@
 			</property>
 		</properties>
 	</rule>
+	<rule ref="WordPress.PHP.NoSilencedErrors.Discouraged">
+      <severity>0</severity>
+     </rule>
 </ruleset>
