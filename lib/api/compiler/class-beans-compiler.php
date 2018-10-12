@@ -465,7 +465,7 @@ final class _Beans_Compiler {
 		$request = wp_remote_get( $fragment );
 
 		if ( is_wp_error( $request ) ) {
-			var_dump( '1', $request );
+			var_dump( '1', $fragment, 'Request', $request );
 			return '';
 		}
 
