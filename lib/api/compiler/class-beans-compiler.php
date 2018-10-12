@@ -465,8 +465,7 @@ final class _Beans_Compiler {
 		$request = wp_remote_get( $fragment );
 
 		if ( is_wp_error( $request ) ) {
-			$error_string = $result->get_error_message();
-			echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
+			var_dump( '1', $request->get_error_message() );
 			return '';
 		}
 
@@ -479,8 +478,7 @@ final class _Beans_Compiler {
 			$request  = wp_remote_get( $fragment );
 
 			if ( is_wp_error( $request ) ) {
-				$error_string = $result->get_error_message();
-				echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
+				var_dump( '2', $request->get_error_message() );
 				return '';
 			}
 		}
