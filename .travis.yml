@@ -7,14 +7,20 @@ cache:
     vendor
 
 php:
+  - 5.3
+  - 5.4
+  - 5.5
   - 5.6
+  - 7.0
+  - 7.1
   - 7.2
+  - 7.3.0RC1
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
-  - WP_VERSION=trunk WP_MULTISITE=0
-  - WP_VERSION=trunk WP_MULTISITE=1
+  # - WP_VERSION=latest WP_MULTISITE=1
+  # - WP_VERSION=trunk WP_MULTISITE=0
+  # - WP_VERSION=trunk WP_MULTISITE=1
 
 install:
   - composer install
