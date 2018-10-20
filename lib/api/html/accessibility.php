@@ -12,7 +12,7 @@
  *
  * @since 1.5.0
  *
- * @return void
+ * @return null|bool Returns false when no skip links, otherwise null.
  */
 function beans_build_skip_links() {
 	$skip_links = array();
@@ -47,10 +47,10 @@ function beans_build_skip_links() {
 	 *     @type string Anchor text.
 	 * }
 	 */
-	$skip_links = apply_filters( 'beans_skip_links_list', $skip_links );
+	$skip_links = (array) apply_filters( 'beans_skip_links_list', $skip_links );
 
 	if ( empty( $skip_links ) ) {
-		return;
+		return false;
 	}
 
 	beans_output_skip_links( $skip_links );
